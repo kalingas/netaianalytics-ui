@@ -1,0 +1,25 @@
+.user-input {
+    display: flex;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ccc;
+  }
+  
+  .user-input-textarea {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+    overflow: auto; /* Make textarea scrollable when content exceeds its height */
+    min-height: 38px; /* Minimum height to match the send button */
+    max-height: 114px; /* Maximum height (3 times the min-height) */
+    line-height: 1.5;
+    margin-right: 5px; /* Add some space between the textarea and the send button */
+  }
+  
+  .send-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }

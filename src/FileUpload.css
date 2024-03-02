@@ -1,0 +1,20 @@
+
+.file-upload-container {
+    text-align: center;
+    /* ... other styles ... */
+  }
+  
+  .file-upload-label {
+    cursor: pointer;
+    /* ... other styles ... */
+  }
+  .progress-bar-container {
+    width: 100%;
+    background-color: #ddd;
+  }
+  
+  .progress-bar {
+    height: 5px;
+    background-color: green;
+    transition: width 0.4s ease;
+  }

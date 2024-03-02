@@ -1,0 +1,44 @@
+/* ChatHistory.css */
+.chat-history {
+    height: 300px; /* or use 'calc(100vh - [other elements height])' to fill the screen */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    border: 1px solid #ccc;
+    padding: 10px;
+    word-wrap: break-word; /* Break long words to prevent horizontal overflow */
+  }
+  
+  .message-container {
+    margin: 10px 0;
+    display: flex; /* Use flex layout for better control */
+    justify-content: flex-end; /* Align user messages to the right */
+  }
+  
+  .message-container.left {
+    justify-content: flex-start; /* Align AI messages to the left */
+  }
+  
+  .message {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 80%; /* Prevents messages from being too wide */
+    word-break: break-word; /* Ensure words break to prevent overflow */
+  }
+  
+  .message.ai {
+    background-color: #eee;
+    color: #333;
+  }
+  
+  .message.user {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .message-container.left .message {
+    background-color: #e0e0e0; /* Lighter shade for AI messages */
+  }
+  
+  .message-container.right .message {
+    background-color: #c0c0c0; /* Darker shade for user messages */
+  }

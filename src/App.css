@@ -1,0 +1,310 @@
+/* App.css */
+
+/* Global styles */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Define the light theme variables */
+.light-theme {
+  --background-color: #f0f0f0;
+  --primary-text-color: #333;
+  --header-footer-bg-color: #e0e0e0; /* Lighter shade for header and footer */
+  --input-border-color: #ccc; /* Border color for user input */
+  --input-bg-color: #fff;
+  --header-footer-text-color: #007bff;
+  --message-bg-color: #e0e0e0;
+  --user-message-bg-color: #d9d9d9;
+  --user-message-text-color: #fff;
+  --file-upload-bg-color: #f9f9f9;
+  --file-upload-text-color: #007bff;
+  --progress-bar-bg-color: #ddd;
+  --progress-bar-fill-color: #007bff;
+  --send-button-bg-color: transparent;
+  --send-button-text-color:  #000000; /* Text/icon color for the send button in light theme */
+  --toggle-button-bg-color: transparent;
+  --toggle-button-text-color:  #000000; 
+  --message-user-bg-color: #e6e6e6; /* Light theme: slightly darker shade for user message */
+  --message-ai-bg-color: #f0f0f0; /* Light theme: same as chat container background color */
+  --message-text-color: #333; /* Text color for messages in light theme */
+  --progress-bar-fill-color: #2196F3; /* Default blue color for progress bar */
+  --progress-bar-complete-color: #4e8cff; /* Green color indicating completion */
+  --icon-color: #000000; 
+}
+
+/* Define the dark theme variables */
+:root {
+  --background-color: #121212;
+  --primary-text-color: #ffffff;
+  --header-footer-bg-color: #1f1f1f; /* Darker shade for header and footer */
+  --input-border-color: #333; /* Border color for user input in dark theme */
+  --input-bg-color: #2b2b2b;
+  --header-footer-text-color: #ffffff;
+  --message-bg-color: #2b2b2b;
+  --user-message-bg-color: #262626;
+  --user-message-text-color: #ffffff;
+  --ai-message-bg-color: #333333;
+  --ai-message-text-color: #dddddd;
+  --file-upload-bg-color: #1f1f1f;
+  --file-upload-text-color: #4e8cff;
+  --progress-bar-bg-color: #333333;
+  --progress-bar-fill-color: #4e8cff;
+  --send-button-bg-color: transparent;
+  --send-button-text-color:  #ffffff; 
+  --toggle-button-bg-color: transparent;
+  --toggle-button-text-color: #ffffff;/* Text/icon color for the send button in dark theme */
+  --message-user-bg-color: #1a1a1a; /* Dark theme: slightly darker shade for user message */
+  --message-ai-bg-color: #121212; /* Dark theme: same as chat container background color */
+  --message-text-color: #ddd; /* Text color for messages in dark theme */
+  --progress-bar-fill-color: #BB86FC; /* Purple color for progress bar in dark theme */
+  --progress-bar-complete-color: #4e8cff; /* Teal color indicating completion in dark theme */
+  --icon-color: #ffffff; 
+}
+
+/* App container and layout */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+}
+
+.app-header {
+  padding: 20px;
+  background-color: var(--header-footer-bg-color);
+  text-align: center;
+  position: relative;
+  font-family: 'Roboto', sans-serif; /* Use the imported font */
+  font-size: 2rem; /* Larger font size for the header */
+  font-weight: 1000; /* Medium weight for the font */
+  color: transparent; /* Make the text color transparent to reveal the gradient */
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b); /* Gradient color for the header */
+  -webkit-background-clip: text; /* Apply the gradient to the text */
+  background-clip: text; /* Apply the gradient to the text */
+  margin-bottom: 20px; /* Add some space below the header */
+}
+
+.app-footer {
+  padding: 20px;
+  background-color: var(--header-footer-bg-color);
+  color: var(--header-footer-text-color);
+  text-align: center;
+  position: relative;
+}
+
+/* Chat container and its children */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.chat-history {
+  flex: 7;
+  overflow-y: auto;
+  background-color: var(--background-color);
+  position: relative;
+}
+
+.file-upload-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--file-upload-bg-color);
+  color: var(--file-upload-text-color);
+  text-align: center;
+  transition: opacity 0.4s ease;
+  position: absolute; /* Absolute position to overlay on chat-history */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-upload-icon { 
+  color: var(--icon-color); /* Use theme variable for icon color */
+  background-color: transparent; /* Ensure there is no background color */
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.file-upload-prompt {
+  font-size: 2.5rem; /* Larger font size */
+  font-weight: bold;
+  background: linear-gradient(to right, #007bff, #ff7e5f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  /* margin: 20px 0; */
+  margin: 0 0 20px 0; /* Remove default paragraph margin */
+  line-height: 1.4; /* Adjust line spacing if needed */
+  text-align: left; /* Center the text */
+}
+
+.file-upload-success {
+  font-size: 1.2rem; /* Choose an appropriate font size */
+  font-weight: bold; /* Bold font */
+  color: var(--progress-bar-complete-color); /* Use the complete color variable */
+  margin-top: 20px; /* Add space above the success message */
+}
+
+.upload-success-message {
+  padding: 10px;
+  background-color: var(--progress-bar-complete-color); /* Use the complete color variable */
+  color: var(--primary-text-color);
+  text-align: center;
+  font-weight: bold;
+  /* margin-bottom: 10px;  */
+}
+/* Progress bar styles */
+.progress-bar-container {
+  width: 50%; 
+  margin: 20px auto;
+  background-color: var(--progress-bar-bg-color);
+  height: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--progress-bar-fill-color); /* Default progress color */
+  width: 0;
+  transition: width 0.4s ease, background-color 0.4s ease; /* Smooth transition for width and color */
+}
+
+/* Additional class for the progress bar when upload is complete */
+.progress-bar-complete {
+  background-color: var(--progress-bar-complete-color); /* Different color when upload is complete */
+}
+
+.user-input-container {
+  width: 100%; /* Container takes the full width */
+  height: 15%; /* Adjust the height as needed */
+  padding: 10px;
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Horizontally center children */
+  align-items: center; /* Vertically center children */
+  background-color: var(--background-color);
+}
+
+.user-input-textarea {
+  width: calc(80% - 20px); /* Subtract the width of the button and its padding */
+  min-height: 78px;
+  max-height: 114px;
+  line-height: 1.5;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--input-border-color);
+  background-color: var(--input-bg-color);
+  color: var(--primary-text-color);
+  resize: none;
+  overflow: hidden;
+}
+
+.send-button {
+  padding: 10px;
+  border: none;
+  background-color: var(--send-button-bg-color);
+  color: var(--send-button-text-color); /* Text/icon color changes with the theme */
+  cursor: pointer;
+  align-self: center;
+  border-radius: 5px; 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Message styles */
+/* Styles for the message containers */
+.message-container {
+  width: 100%; /* Full width to allow the user message background to span the entire width */
+  display: flex;
+  justify-content: center; /* Center the message block within the container */
+  /* margin: 10px 0;  */
+}
+
+.message {
+  width: 80%; /* Set the width for the message content */
+  padding: 10px;
+  word-break: break-word; /* Ensure long words do not overflow */
+  text-align: left; /* Align text to the left */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+  background-color: transparent; /* Ensure no background color is set here */
+}
+.message-user .message-content{
+  width: 100%;
+  background-color: var(--user-message-bg-color);
+}
+
+.message-ai .message-content {
+  width: 100%;
+  background-color: transparent;
+}
+/* .light-theme .message-user .message-content{
+  width: 100%;
+  background-color: #d9d9d9; 
+}
+
+.light-theme .message-ai .message-content {
+  background-color: transparent;
+}
+
+:root .message-user .message-content {
+  width: 100%;
+  background-color: #262626; 
+}
+
+:root .message-ai .message-content {
+  background-color: transparent;
+} */
+
+
+
+
+/* Additional wrapper for the text content of messages to handle padding and background */
+.message-content {
+  background-color: inherit; /* Inherit the background color from the message type */
+  /* min-height: 80px; */
+  padding: 10px;
+  /* border-radius: 20px; */
+  display: inline-block; /* Allow the background and padding to wrap the content */
+  /* display: flex;
+  align-items: center; */
+}
+
+
+
+
+/* Theme toggle switch styles */
+.theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--toggle-button-text-color);
+  background-color: var(--toggle-button-bg-color);
+}
+
+/* ... additional styles ... */
