@@ -307,4 +307,56 @@ html, body, #root {
   background-color: var(--toggle-button-bg-color);
 }
 
-/* ... additional styles ... */
+/* Style the table with a border around the table and each cell */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Style the table header row */
+.data-table thead tr {
+  background-color: #3961b0;
+  color: #ffffff;
+}
+
+/* Style the table header cells */
+.data-table th {
+  padding: 12px 15px;
+  text-align: center; /* Align header text to center */
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+
+.data-table th,
+.data-table td {
+  padding: 12px 15px;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+/* Zebra stripes for the table rows */
+.data-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+/* Hover effect for table rows */
+.data-table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Style for the table header cells */
+.data-table th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
