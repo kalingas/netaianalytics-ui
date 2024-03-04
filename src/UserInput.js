@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './App.css';
 
-const UserInput = ({ onSendMessage, disabled }) => {
+const UserInput = ({ onSendMessage, disabled, onCancel, aiTyping }) => {
   const [message, setMessage] = useState('');
   const textareaRef = useRef(null);
 
@@ -35,9 +35,13 @@ const UserInput = ({ onSendMessage, disabled }) => {
     }
   };
 
+  const handleCancel = () => {
+    
+  };
+
   return (
     <div className="user-input-container">
-      <textarea 
+      <textarea
         ref={textareaRef}
         className="user-input-textarea"
         value={message}
@@ -49,6 +53,13 @@ const UserInput = ({ onSendMessage, disabled }) => {
       <button onClick={handleSend} className="send-button" disabled={disabled}>
         <FontAwesomeIcon icon={faPaperPlane} />
       </button>
+
+      {aiTyping && (
+        <div className="loading-container">
+          <div className="loading-indicator"></div>
+          <button onClick={onCancel} className="cancel-button">Cancel</button>
+        </div>
+      )}
     </div>
   );
 };

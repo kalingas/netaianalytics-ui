@@ -14,12 +14,12 @@ function App() {
   const [inputDisabled, setInputDisabled] = useState(true);
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [aiTyping, setAiTyping] = useState(false);
-  const [currentAiMessage, setCurrentAiMessage] = useState(''); 
-  const [isFileUploaded, setIsFileUploaded] = useState(false);  
+  const [currentAiMessage, setCurrentAiMessage] = useState('');
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
 
 
   const handleSendMessage = (message) => {
-    
+
     setMessages([...messages, { text: message, sender: 'user' }]);
     // Simulate AI response
     // setTimeout(() => {
@@ -27,6 +27,8 @@ function App() {
     // }, 100);
     // const message = { text: message, isBot: false };
     // setMessages((messages) => [ ...messages,message]);
+    setAiTyping(true); // Start showing the AI typing/loading indicator
+    setInputDisabled(true); // Disable the input while waiting for the AI response
     console.log(message);
 
     axios
@@ -37,16 +39,20 @@ function App() {
         const reply = { text: response.data, sender: 'ai' };
         setMessages((messages) => [...messages, reply]);
         //typeMessage(response.data.text, 'ai');
+        setAiTyping(false); // Stop showing the AI typing/loading indicator
+        setInputDisabled(false); // Re-enable the input
       })
       .catch((error) => {
         console.error('Error:', error);
         const errorMessage = { text: 'An error occurred. Please try again later.', sender: 'ai' };
         setMessages((messages) => [...messages, errorMessage]);
         //typeMessage('An error occurred. Please try again later.', 'ai');
+        setAiTyping(false); // Stop showing the AI typing/loading indicator
+        setInputDisabled(false); // Re-enable the input
       });
     //typeMessage(message, 'ai');
-    
-    
+
+
   };
 
   const typeMessage = (message, sender) => {
@@ -70,7 +76,7 @@ function App() {
         }
       }, typingSpeed * i);
     }
-  
+
     // Add a temporary 'typing' message to indicate the AI is typing
     setMessages((prevMessages) => [...prevMessages, { text: '', sender: 'typing' }]);
   };
@@ -109,6 +115,11 @@ function App() {
     // setInputDisabled(false); // Enable the input after the file is uploaded
     setUploadedFileName(file.name); // Store the uploaded file name
   };
+  const handleCancel = () => {
+    setAiTyping(false); // This should stop showing the AI typing indicator
+    setInputDisabled(false); // This should re-enable the input
+    // You might need additional logic to actually cancel the AI's response if possible
+  };
 
   const toggleTheme = () => {
     setLightTheme(!lightTheme);
@@ -123,16 +134,21 @@ function App() {
         </div>
       </header>
       <div className="chat-container">
-        <ChatHistory messages={messages} showFileUpload={!fileUploaded} onFileUpload={handleFileUpload}  aiTyping={aiTyping} currentAiMessage={currentAiMessage}/>
+        <ChatHistory messages={messages} showFileUpload={!fileUploaded} onFileUpload={handleFileUpload} aiTyping={aiTyping} currentAiMessage={currentAiMessage} />
         {fileUploaded && (
           <div className="upload-success-message">
             File {uploadedFileName} has been uploaded successfully.
             <p>Enter your prompt to start the analysis.</p>
           </div>
         )}
-        
-        
-        <UserInput onSendMessage={handleSendMessage} disabled={inputDisabled} />
+
+
+        <UserInput
+          onSendMessage={handleSendMessage}
+          disabled={inputDisabled || aiTyping}
+          onCancel={handleCancel}
+          aiTyping={aiTyping}
+        />
       </div>
       {/* <footer className="app-footer">By aToi()</footer> */}
     </div>

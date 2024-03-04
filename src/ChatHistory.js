@@ -60,7 +60,7 @@ const ChatHistory = ({ messages, showFileUpload, onFileUpload, aiTyping, current
           )}
         </div>
       ))}
-      {aiTyping && (
+      {/* {aiTyping && (
         <div className="message-container ai-container">
           <div className="message message-ai">
             <div className="message-content">
@@ -70,6 +70,20 @@ const ChatHistory = ({ messages, showFileUpload, onFileUpload, aiTyping, current
                 <div className="dot"></div>
                 <div className="dot"></div>
               </span></div>
+            </div>
+          </div>
+        </div>
+      )} */}
+      {aiTyping && (
+        <div className="message-container ai-container">
+          <div className="message message-ai">
+            <div className="message-content">
+              <strong>NetAIAnalytics:</strong>
+              <div className="loading-indicator-container">
+                <span className="dot">.</span>
+                <span className="dot">.</span>
+                <span className="dot">.</span>
+              </div>
             </div>
           </div>
         </div>
